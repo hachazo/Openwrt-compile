@@ -59,7 +59,7 @@ jobs:
           command: |
             cd openwrt_tlwr841hp_v2/
             #make oldconfig
-            make -j$(nproc)  # Compila usando todos los núcleos disponibles
+            make -j$(nproc) V=sc # Compila usando todos los núcleos disponibles
 
 workflows:
   version: 2
