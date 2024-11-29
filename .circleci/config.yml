@@ -46,21 +46,21 @@ jobs:
       - run:
           name: Descargar código fuente de OpenWRT
           command: |
-            git clone https://github.com/hachazo/openwrt_tlwr841hp_v2.git
-            cd openwrt_tlwr841hp_v2/
+            git clone https://github.com/hachazo/openwrt-tl-wr841hp.git
+            cd openwrt-tl-wr841hp/
             ./scripts/feeds update -a
             ./scripts/feeds install -a
 
        # # # # # # # # # # - run:
           # # # # # # # # # # name: configurar openwrt
           # # # # # # # # # # command: |
-            # # # # # # # # # # cd openwrt_tlwr841hp_v2/
+            # # # # # # # # # # cd openwrt-tl-wr841hp/
             # # # # # # # # # # make defconfig  # o usa `menuconfig` si necesitas personalizar la configuración
 
       - run:
           name: Compilar OpenWRT
           command: |
-            cd openwrt_tlwr841hp_v2/
+            cd openwrt-tl-wr841hp/
             make oldconfig
             make -j$(nproc) V=s # Compila usando todos los núcleos disponibles
 
