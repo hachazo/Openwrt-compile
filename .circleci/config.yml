@@ -51,7 +51,9 @@ jobs:
 
       - run:
           name: Compilar OpenWRT
-          command: make -j$(nproc)  # Compila usando todos los núcleos disponibles
+          command: |
+          cd openwrt_tlwr841hp_v2/
+          make -j$(nproc)  # Compila usando todos los núcleos disponibles
 
 workflows:
   version: 2
