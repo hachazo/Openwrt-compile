@@ -35,7 +35,10 @@ jobs:
               unzip \
               zlib1g-dev \
               file \
-              wget
+              libgl1-mesa-dev \
+              wget \
+              libwayland-dev \
+              libgraphene-1.0-dev
 
       - run:
           name: Descargar código fuente de OpenWRT
@@ -55,7 +58,7 @@ jobs:
           name: Compilar OpenWRT
           command: |
             cd openwrt_tlwr841hp_v2/
-            make oldconfig
+            #make oldconfig
             make -j$(nproc)  # Compila usando todos los núcleos disponibles
 
 workflows:
