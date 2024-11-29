@@ -10,7 +10,7 @@ jobs:
   build:
     executor: openwrt-build
     steps:
-      #- checkout  # Clona el repositorio actual
+      - checkout  # Clona el repositorio actual
       
       - run:
           name: Instalar dependencias
@@ -45,16 +45,17 @@ jobs:
             ./scripts/feeds update -a
             ./scripts/feeds install -a
 
-       - run:
-          name: configurar openwrt
-          command: |
-            cd openwrt_tlwr841hp_v2/
-            make defconfig  # o usa `menuconfig` si necesitas personalizar la configuración
+       # # # # # # # # # # - run:
+          # # # # # # # # # # name: configurar openwrt
+          # # # # # # # # # # command: |
+            # # # # # # # # # # cd openwrt_tlwr841hp_v2/
+            # # # # # # # # # # make defconfig  # o usa `menuconfig` si necesitas personalizar la configuración
 
       - run:
           name: Compilar OpenWRT
           command: |
             cd openwrt_tlwr841hp_v2/
+            make defconfig 
             make -j$(nproc)  # Compila usando todos los núcleos disponibles
 
 workflows:
