@@ -41,7 +41,7 @@ jobs:
           name: Descargar código fuente de OpenWRT
           command: |
             git clone https://github.com/hachazo/openwrt_tlwr841hp_v2.git
-	    cd openwrt_tlwr841hp_v2
+            cd openwrt_tlwr841hp_v2/
             ./scripts/feeds update -a
             ./scripts/feeds install -a
 
