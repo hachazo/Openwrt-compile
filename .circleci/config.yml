@@ -46,6 +46,10 @@ jobs:
             ./scripts/feeds install -a
 
       - run:
+          name: Configurar OpenWRT
+          command: make defconfig  # O usa `menuconfig` si necesitas personalizar la configuración
+
+      - run:
           name: Compilar OpenWRT
           command: make -j$(nproc)  # Compila usando todos los núcleos disponibles
 
