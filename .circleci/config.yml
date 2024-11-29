@@ -10,7 +10,7 @@ jobs:
   build:
     executor: openwrt-build
     steps:
-      - checkout  # Clona el repositorio actual
+      #- checkout  # Clona el repositorio actual
       
       - run:
           name: Instalar dependencias
