@@ -3,7 +3,7 @@ version: 2.1
 executors:
   openwrt-build:
     docker:
-      - image: ubuntu:22.04  # Puedes cambiar a otra versión si es necesario
+      - image: debian:12  # Puedes cambiar a otra versión si es necesario
     working_directory: ~/openwrt
 
 jobs:
