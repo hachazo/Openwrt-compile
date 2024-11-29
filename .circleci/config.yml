@@ -45,9 +45,11 @@ jobs:
             ./scripts/feeds update -a
             ./scripts/feeds install -a
 
-      # # - run:
-          # # name: Configurar OpenWRT
-          # # command: make defconfig  # O usa `menuconfig` si necesitas personalizar la configuración
+       - run:
+          name: configurar openwrt
+          command: |
+            cd openwrt_tlwr841hp_v2/
+            make defconfig  # o usa `menuconfig` si necesitas personalizar la configuración
 
       - run:
           name: Compilar OpenWRT
