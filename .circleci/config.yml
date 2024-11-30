@@ -21,15 +21,15 @@ jobs:
             source venv/bin/activate
             #pip install --upgrade pip
             #pip install pyinstaller
-            mkdir -p /wine/python
+            sudo mkdir -p /wine/python
             cd /wine/python
-            wget https://www.python.org/ftp/python/3.11.4/python-3.11.4-embed-win32.zip
-            unzip python-*.zip
-            rm -f python-*.zip
-            wget https://bootstrap.pypa.io/get-pip.py
-            wine python get-pip.py
-            wine python -m pip --help
-            wine pip3 install pyinstaller
+            sudo wget https://www.python.org/ftp/python/3.11.4/python-3.11.4-embed-win32.zip
+            sudo unzip python-*.zip
+            sudo rm -f python-*.zip
+            sudo wget https://bootstrap.pypa.io/get-pip.py
+            sudo wine python get-pip.py
+            sudo wine python -m pip --help
+            sudo wine pip3 install pyinstaller
       - run:
           name: Generar el ejecutable
           command: |
