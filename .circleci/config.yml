@@ -21,11 +21,10 @@ jobs:
             source venv/bin/activate
             #pip install --upgrade pip
             #pip install pyinstaller
-            export WINEDLLOVERRIDES="mscoree=d"
-            wget http://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi
-            wine msiexec /i wine-gecko-2.47.1-x86.msi
-            wget https://www.python.org/ftp/python/3.9.2/amd64/core.msi
-            xvfb-run wine msiexec /i  core.msi /qn
+            wget -O python-installer.exe https://www.python.org/ftp/python/3.11.1/python-3.11.1-amd64.exe
+            wine python-installer.exe /quiet InstallAllUsers=1 PrependPath=1 TargetDir=/root/.wine/drive_c/Python
+            wine /root/.wine/drive_c/Python/python.exe -m pip install --upgrade pip
+            #xvfb-run wine msiexec /i  core.msi /qn
       - run:
           name: Generar el ejecutable
           command: |
