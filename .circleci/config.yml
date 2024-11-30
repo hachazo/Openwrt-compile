@@ -16,17 +16,20 @@ jobs:
           command: |
             sudo dpkg --add-architecture i386
             sudo apt-get update
-            sudo apt-get install -y wine64 wine32 xvfb
+            sudo apt-get install -y wine64 wine32 xvfb unzip
             python -m venv venv
             source venv/bin/activate
             #pip install --upgrade pip
             #pip install pyinstaller
-            wget http://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi
-            xvfb-run wine msiexec /i wine-gecko-2.47.1-x86.msi
-            xvfb-run wine python-installer.exe /quiet InstallAllUsers=1 PrependPath=1 TargetDir=/root/.wine/drive_c/Python
-            xvfb-run wine /root/.wine/drive_c/Python/python.exe -m pip install --upgrade pip
-            wget https://www.python.org/ftp/python/3.9.2/amd64/core.msi
-            xvfb-run wine msiexec /i  core.msi /qn
+            mkdir -p /wine/python
+            cd /wine/python
+            wget https://www.python.org/ftp/python/3.11.4/python-3.11.4-embed-win32.zip
+            unzip python-*.zip
+            rm -f python-*.zip
+            wget https://bootstrap.pypa.io/get-pip.py
+            wine python get-pip.py
+            wine python -m pip --help
+            wine pip3 install pyinstaller
       - run:
           name: Generar el ejecutable
           command: |
