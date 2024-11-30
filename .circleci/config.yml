@@ -16,14 +16,14 @@ jobs:
           command: |
             sudo dpkg --add-architecture i386
             sudo apt-get update
-            sudo apt-get install -y wine64 wine32
+            sudo apt-get install -y wine64 wine32 xvfb
             python -m venv venv
             source venv/bin/activate
-            pip install --upgrade pip
-            pip install pyinstaller
+            #pip install --upgrade pip
+            #pip install pyinstaller
             export WINEDLLOVERRIDES="mscoree=d"
             wget https://www.python.org/ftp/python/3.9.2/amd64/core.msi
-            wine msiexec /i  core.msi /qn
+            xvfb-run wine msiexec /i  core.msi /qn
       - run:
           name: Generar el ejecutable
           command: |
