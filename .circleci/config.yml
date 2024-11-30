@@ -22,7 +22,7 @@ jobs:
           name: Generar el ejecutable
           command: |
             source venv/bin/activate
-            pyinstaller --onefile --add-data="src;src" src/main.py
+            pyinstaller --onefile --add-data "src;src" src/Heroes_Del_Balon.py
       - run:
           name: Mover el ejecutable al directorio raíz
           command: mv dist/main.exe Heroes-Del-Balon.exe
