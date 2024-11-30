@@ -34,7 +34,7 @@ jobs:
             sudo wineboot --restart
             export PYTHONHASHSEED=4294967295
             sudo wine python get-pip.py
-            cd /wine/python/ScriptsScripts
+            cd /wine/python/Scripts
             sudo wine pip.exe install pyinstaller
       - run:
           name: Generar el ejecutable
