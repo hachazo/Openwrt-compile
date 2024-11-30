@@ -30,7 +30,7 @@ jobs:
             sudo wine python get-pip.py
             cd /wine/python/Scripts
             ls /wine/python/Scripts
-            sudo wine pip.exe install pyinstaller
+            sudo wine /wine/python/Scripts/pip.exe install pyinstaller
       - run:
           name: Generar el ejecutable
           command: |
