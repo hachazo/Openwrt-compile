@@ -61,7 +61,7 @@ jobs:
             git commit -m "Configurar Git LFS"
             git add Heroes_Del_Balon.exe
             git commit -m "Añadido ejecutable generado por CircleCI con Git LFS"
-            git push origin main
+            git push --force-with-lease origin main
 workflows:
   build-and-deploy:
     jobs:
