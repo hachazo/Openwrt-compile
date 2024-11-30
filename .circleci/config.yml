@@ -16,7 +16,7 @@ jobs:
           command: |
             sudo dpkg --add-architecture i386
             sudo apt-get update
-            sudo apt-get install -y wine64 wine32 xvfb unzip
+            sudo apt-get install -y wine64 wine32 unzip
             python -m venv venv
             source venv/bin/activate
             #pip install --upgrade pip
@@ -30,8 +30,8 @@ jobs:
             export WINEPATH="Z:\\wine\\python\\Scripts;Z:\\wine\\python" 
             sudo rm python*._pth
             sudo wget https://bootstrap.pypa.io/get-pip.py
-            wineboot --init
-            wineboot --restart
+            sudo wineboot --init
+            sudo wineboot --restart
             export PYTHONHASHSEED=4294967295
             sudo wine python get-pip.py
             sudo wine pip install pyinstaller
