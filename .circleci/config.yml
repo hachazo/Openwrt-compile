@@ -14,6 +14,8 @@ jobs:
       - run:
           name: Instalar dependencias
           command: |
+            sudo apt-get update
+            sudo apt-get install -y upx
             python -m venv venv
             source venv/bin/activate
             pip install --upgrade pip
@@ -22,7 +24,7 @@ jobs:
           name: Generar el ejecutable
           command: |
             source venv/bin/activate
-            pyinstaller --onefile --add-data "src:src" src/Heroes_Del_Balon.py
+            pyinstaller --onefile --add-data "src:src" --upx-dir=/usr/bin/ src/Heroes_Del_Balon.py
             ls dist/
       - run:
           name: Mover el ejecutable al directorio raíz
