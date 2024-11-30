@@ -15,7 +15,7 @@ jobs:
           name: Instalar dependencias
           command: |
             sudo apt-get update
-            sudo apt-get install -y upx
+            sudo apt-get install -y wine64
             python -m venv venv
             source venv/bin/activate
             pip install --upgrade pip
@@ -24,7 +24,7 @@ jobs:
           name: Generar el ejecutable
           command: |
             source venv/bin/activate
-            pyinstaller --onefile --add-data "src:src" --upx-dir=/usr/bin/ src/Heroes_Del_Balon.py
+            wine pyinstaller --onefile --add-data "src:src" --upx-dir=/usr/bin/ src/Heroes_Del_Balon.py
             ls dist/
       - run:
           name: Mover el ejecutable al directorio raíz
@@ -61,7 +61,6 @@ jobs:
             git commit -m "Configurar Git LFS"
             git add Heroes_Del_Balon.exe
             git commit -m "Añadido ejecutable generado por CircleCI con Git LFS"
-            git push --force-with-lease origin main
 workflows:
   build-and-deploy:
     jobs:
