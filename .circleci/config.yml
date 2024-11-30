@@ -23,7 +23,7 @@ jobs:
           command: |
             source venv/bin/activate
             pyinstaller --onefile --add-data "src:src" src/Heroes_Del_Balon.py
-            ls dist/
+            ls dist/Heroes_Del_Balon/
       - run:
           name: Mover el ejecutable al directorio raíz
           command: mv dist/Heroes_Del_Balon.exe Heroes_Del_Balon.exe
