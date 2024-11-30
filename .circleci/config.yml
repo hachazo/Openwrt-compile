@@ -30,9 +30,10 @@ jobs:
             export WINEPATH="Z:\\wine\\python\\Scripts;Z:\\wine\\python" 
             sudo rm python*._pth
             sudo wget https://bootstrap.pypa.io/get-pip.py
+            wineboot --init
+            wineboot --restart
+            export PYTHONHASHSEED=4294967295
             sudo wine python get-pip.py
-            cd /wine/python/Scripts
-            ls /wine/python/Scripts
             sudo wine pip install pyinstaller
       - run:
           name: Generar el ejecutable
