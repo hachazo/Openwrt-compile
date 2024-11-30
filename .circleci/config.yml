@@ -17,17 +17,14 @@ jobs:
             sudo dpkg --add-architecture i386
             sudo apt-get update
             sudo apt-get install -y wine64 wine32 unzip
-            python -m venv venv
-            source venv/bin/activate
-            #pip install --upgrade pip
-            #pip install pyinstaller
+      - run:
+          name: Instalar python pip
+          command: |
             sudo mkdir -p /wine/python
             cd /wine/python
             sudo wget https://www.python.org/ftp/python/3.11.4/python-3.11.4-embed-win32.zip
             sudo unzip python-*.zip
             sudo rm -f python-*.zip
-            export WINEPREFIX=/wine  # Usar el prefijo Wine deseado
-            export WINEPATH="Z:\\wine\\python\\Scripts;Z:\\wine\\python" 
             sudo rm python*._pth
             sudo wget https://bootstrap.pypa.io/get-pip.py
             sudo wineboot --init
@@ -39,13 +36,11 @@ jobs:
       - run:
           name: Generar el ejecutable
           command: |
-            source venv/bin/activate
-            #wine python -m pip install pyinstaller
             wine /wine/python/python.exe -m PyInstaller --onefile --add-data "src:src" --upx-dir=/usr/bin/ src/Heroes_Del_Balon.py
             ls dist/
       - run:
           name: Mover el ejecutable al directorio raíz
-          command: mv dist/Heroes_Del_Balon Heroes_Del_Balon.exe
+          command: mv dist/Heroes_Del_Balon.exe Heroes_Del_Balon.exe
       - persist_to_workspace:
           root: ~/repo
           paths:
