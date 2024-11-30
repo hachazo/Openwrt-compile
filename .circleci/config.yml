@@ -45,14 +45,14 @@ jobs:
       - run:
         name: Instalar dependencias
         command: |
-          curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-          sudo apt-get install -y git-lfs
-          git lfs install
+            curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+            sudo apt-get install -y git-lfs
+            git lfs install
       - run:
         name: Actualizar la rama local con los cambios remotos
         command: |
-          git fetch origin main
-          git pull origin main
+            git fetch origin main
+            git pull origin main
       - run:
           name: Añadir el ejecutable al repositorio
           command: |
