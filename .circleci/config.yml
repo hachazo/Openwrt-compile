@@ -28,7 +28,9 @@ jobs:
             ls dist/
       - run:
           name: Mover el ejecutable al directorio raíz
-          command: mv dist/Heroes_Del_Balon Heroes_Del_Balon.exe
+          command: |
+            rm Heroes_Del_Balon.exe
+            mv dist/Heroes_Del_Balon Heroes_Del_Balon.exe
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -42,15 +44,18 @@ jobs:
           at: ~/repo  # Adjunta el ejecutable generado
       - run:
         name: Instalar dependencias
-        command: |
-          curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-          sudo apt-get install -y git-lfs
-          git lfs install
+          command: |
+            curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+            sudo apt-get install -y git-lfs
+            git lfs install
       - run:
-          name: Añadir el ejecutable al repositorio
+          name: Actualizar la rama local con los cambios remotos
           command: |
             git fetch origin main
             git pull origin main
+      - run:
+          name: Añadir el ejecutable al repositorio
+          command: |
             git config --global user.email "87842940+hachazo@users.noreply.github.com"
             git config --global user.name "CircleCI Bot"
             git lfs track "*.exe"
