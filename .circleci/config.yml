@@ -20,6 +20,8 @@ jobs:
             source venv/bin/activate
             pip install --upgrade pip
             pip install pyinstaller
+            wget https://www.python.org/ftp/python/3.9.2/python-3.9.2rc1-amd64.exe
+            wine python-3.9.2rc1-amd64.exe /quiet InstallAllUsers=1 PrependPath=1
       - run:
           name: Generar el ejecutable
           command: |
