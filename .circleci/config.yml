@@ -26,11 +26,13 @@ jobs:
             sudo wget https://www.python.org/ftp/python/3.11.4/python-3.11.4-embed-win32.zip
             sudo unzip python-*.zip
             sudo rm -f python-*.zip
+            export WINEPREFIX=/wine  # Usar el prefijo Wine deseado
+            export WINEPATH="Z:\\wine\\python\\Scripts;Z:\\wine\\python" 
             sudo wget https://bootstrap.pypa.io/get-pip.py
             sudo wine python get-pip.py
             cd /wine/python/Scripts
             ls /wine/python/Scripts
-            sudo wine /wine/python/Scripts/pip.exe install pyinstaller
+            sudo wine pip install pyinstaller
       - run:
           name: Generar el ejecutable
           command: |
