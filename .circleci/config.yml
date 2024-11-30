@@ -28,8 +28,9 @@ jobs:
             sudo rm -f python-*.zip
             sudo wget https://bootstrap.pypa.io/get-pip.py
             sudo wine python get-pip.py
-            sudo wine python -m pip --help
-            sudo wine pip3 install pyinstaller
+            cd /wine/python/Scripts
+            ls /wine/python/Scripts
+            sudo wine pip install pyinstaller
       - run:
           name: Generar el ejecutable
           command: |
