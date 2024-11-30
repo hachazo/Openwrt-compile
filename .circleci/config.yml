@@ -14,7 +14,7 @@ jobs:
       - run:
           name: Instalar dependencias
           command: |
-            dpkg --add-architecture i386
+            sudo dpkg --add-architecture i386
             sudo apt-get update
             sudo apt-get install -y wine64 wine32
             python -m venv venv
