@@ -24,7 +24,8 @@ jobs:
           name: Generar el ejecutable
           command: |
             source venv/bin/activate
-            wine pyinstaller --onefile --add-data "src:src" --upx-dir=/usr/bin/ src/Heroes_Del_Balon.py
+            wine python -m pip install pyinstaller
+            wine python3 -m PyInstaller --onefile --add-data "src:src" --upx-dir=/usr/bin/ src/Heroes_Del_Balon.py
             ls dist/
       - run:
           name: Mover el ejecutable al directorio raíz
