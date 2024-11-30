@@ -30,12 +30,12 @@ jobs:
             sudo wine python get-pip.py
             cd /wine/python/Scripts
             ls /wine/python/Scripts
-            sudo wine pip install pyinstaller
+            sudo wine pip.exe install pyinstaller
       - run:
           name: Generar el ejecutable
           command: |
             source venv/bin/activate
-            wine python -m pip install pyinstaller
+            #wine python -m pip install pyinstaller
             wine python3 -m PyInstaller --onefile --add-data "src:src" --upx-dir=/usr/bin/ src/Heroes_Del_Balon.py
             ls dist/
       - run:
