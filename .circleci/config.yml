@@ -40,7 +40,9 @@ jobs:
             ls dist/
       - run:
           name: Mover el ejecutable al directorio raíz
-          command: mv dist/Heroes_Del_Balon.exe Heroes_Del_Balon.exe
+          command: 
+          rm Heroes_Del_Balon.exe > /dev/null 2>&1
+          mv dist/Heroes_Del_Balon.exe Heroes_Del_Balon.exe
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -53,7 +55,7 @@ jobs:
       - attach_workspace:
           at: ~/repo  # Adjunta el ejecutable generado
       - run:
-          name: Instalar dependencias
+          name: Instalar LFS
           command: |
             curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
             sudo apt-get install -y git-lfs
@@ -68,8 +70,8 @@ jobs:
           command: |
             git config --global user.email "87842940+hachazo@users.noreply.github.com"
             git config --global user.name "CircleCI Bot"
-            #git lfs track "*.exe"
-            #git add .gitattributes
+            git lfs track "*.exe" > /dev/null 2>&1
+            git add .gitattributes > /dev/null 2>&1
             git commit -m "Configurar Git LFS"
             git add Heroes_Del_Balon.exe
             git commit -m "Añadido ejecutable generado por CircleCI con Git LFS"
