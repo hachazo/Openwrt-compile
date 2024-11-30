@@ -28,6 +28,7 @@ jobs:
             sudo rm -f python-*.zip
             export WINEPREFIX=/wine  # Usar el prefijo Wine deseado
             export WINEPATH="Z:\\wine\\python\\Scripts;Z:\\wine\\python" 
+            sudo rm python*._pth
             sudo wget https://bootstrap.pypa.io/get-pip.py
             sudo wine python get-pip.py
             cd /wine/python/Scripts
