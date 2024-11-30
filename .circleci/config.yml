@@ -32,7 +32,7 @@ jobs:
           paths:
             - Heroes_Del_Balon.exe
 
-    deploy-to-repo:
+  deploy-to-repo:
     executor: python-executor
     steps:
       - checkout  # Clona el repositorio
@@ -46,7 +46,6 @@ jobs:
             git add Heroes_Del_Balon.exe
             git commit -m "Añadido ejecutable generado por CircleCI"
             git push origin main
-
 workflows:
   build-and-deploy:
     jobs:
