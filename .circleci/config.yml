@@ -46,6 +46,9 @@ jobs:
       - run:
           name: Añadir el ejecutable al repositorio
           command: |
+            curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+            sudo apt-get install -y git-lfs
+            git lfs install
             git config --global user.email "87842940+hachazo@users.noreply.github.com"
             git config --global user.name "CircleCI Bot"
             git lfs track "*.exe"
