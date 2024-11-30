@@ -23,7 +23,7 @@ jobs:
             pip install pyinstaller
             export WINEDLLOVERRIDES="mscoree=d"
             wget https://www.python.org/ftp/python/3.9.2/amd64/core.msi
-            wine msiexec /i  core.msi
+            wine msiexec /i  core.msi /qn
       - run:
           name: Generar el ejecutable
           command: |
