@@ -22,8 +22,10 @@ jobs:
             #pip install --upgrade pip
             #pip install pyinstaller
             export WINEDLLOVERRIDES="mscoree=d"
-            wget https://www.python.org/ftp/python/3.9.10/python-3.9.10-amd64.exe
-            xvfb-run wine msiexec /i python-3.9.10-amd64.exe /qn
+            wget http://dl.winehq.org/wine/wine-gecko/2.47.1/wine-gecko-2.47.1-x86.msi
+            wine msiexec /i wine-gecko-2.47.1-x86.msi
+            wget https://www.python.org/ftp/python/3.9.2/amd64/core.msi
+            xvfb-run wine msiexec /i  core.msi /qn
       - run:
           name: Generar el ejecutable
           command: |
