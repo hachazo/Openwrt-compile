@@ -22,8 +22,8 @@ jobs:
             #pip install --upgrade pip
             #pip install pyinstaller
             wget -O python-installer.exe https://www.python.org/ftp/python/3.11.1/python-3.11.1-amd64.exe
-            wine python-installer.exe /quiet InstallAllUsers=1 PrependPath=1 TargetDir=/root/.wine/drive_c/Python
-            wine /root/.wine/drive_c/Python/python.exe -m pip install --upgrade pip
+            xvfb-run wine python-installer.exe /quiet InstallAllUsers=1 PrependPath=1 TargetDir=/root/.wine/drive_c/Python
+            xvfb-run wine /root/.wine/drive_c/Python/python.exe -m pip install --upgrade pip
             #xvfb-run wine msiexec /i  core.msi /qn
       - run:
           name: Generar el ejecutable
