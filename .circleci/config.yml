@@ -70,9 +70,9 @@ jobs:
           command: |
             git config --global user.email "87842940+hachazo@users.noreply.github.com"
             git config --global user.name "CircleCI Bot"
-            git lfs track "*.exe" > /dev/null 2>&1
-            git add .gitattributes > /dev/null 2>&1
-            git commit -m "Configurar Git LFS"
+            git lfs track "*.exe" || true
+            git add .gitattributes || true
+            git commit -m "Configurar Git LFS" || true
             git add Heroes_Del_Balon.exe
             git commit -m "Añadido ejecutable generado por CircleCI con Git LFS"
 workflows:
