@@ -1,0 +1,78 @@
+version: 2.1
+
+executors:
+  python-executor:
+    docker:
+      - image: circleci/python:3.9 
+    working_directory: ~/repo
+
+jobs:
+  build-exe:
+    executor: python-executor
+    steps:
+      - checkout
+      - run:
+          name: Instalar dependencias
+          command: |
+            sudo dpkg --add-architecture i386
+            sudo apt-get update
+            sudo apt-get install -y wine64 wine32 unzip
+      - run:
+          name: Instalar python pip
+          command: |
+            sudo mkdir -p /wine/python
+            cd /wine/python
+            sudo wget https://www.python.org/ftp/python/3.11.4/python-3.11.4-embed-win32.zip
+            sudo unzip python-*.zip
+            sudo rm -f python-*.zip
+            sudo rm python*._pth
+            sudo wget https://bootstrap.pypa.io/get-pip.py
+            sudo wineboot --init
+            sudo wineboot --restart
+            export PYTHONHASHSEED=4294967295
+            sudo wine python get-pip.py
+            cd /wine/python/Scripts
+            sudo wine pip.exe install pyinstaller
+      - run:
+          name: Generar el ejecutable
+          command: |
+            wine /wine/python/python.exe -m PyInstaller --onefile --add-data "src:src" --upx-dir=/usr/bin/ src/Heroes_Del_Balon.py
+            ls dist/
+      - run:
+          name: Mover el ejecutable al directorio raíz
+          command: |
+            rm Heroes_Del_Balon.exe || true
+            mv dist/Heroes_Del_Balon.exe Heroes_Del_Balon.exe
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - Heroes_Del_Balon.exe
+
+  deploy-to-repo:
+    executor: python-executor
+    steps:
+      - checkout  # Clona el repositorio
+      - attach_workspace:
+          at: ~/repo  # Adjunta el ejecutable generado
+      - run:
+          name: Instalar LFS
+          command: |
+            curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+            sudo apt-get install -y git-lfs
+            git lfs install
+            ls
+      - run:
+          name: Añadir el ejecutable al repositorio
+          command: |
+            git config --global user.email "87842940+hachazo@users.noreply.github.com"
+            git config --global user.name "CircleCI Bot"
+            git add Heroes_Del_Balon.exe
+            git commit -m "Añadido ejecutable generado por CircleCI con Git LFS"
+            git push origin main
+workflows:
+  build-and-deploy:
+    jobs:
+      - build-exe
+      - deploy-to-repo:
+          requires:
+            - build-exe
