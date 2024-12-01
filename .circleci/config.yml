@@ -41,8 +41,8 @@ jobs:
       - run:
           name: Mover el ejecutable al directorio raíz
           command: |
-          rm Heroes_Del_Balon.exe > /dev/null 2>&1
-          mv dist/Heroes_Del_Balon.exe Heroes_Del_Balon.exe
+            rm Heroes_Del_Balon.exe > /dev/null 2>&1
+            mv dist/Heroes_Del_Balon.exe Heroes_Del_Balon.exe
       - persist_to_workspace:
           root: ~/repo
           paths:
